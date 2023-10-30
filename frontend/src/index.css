@@ -1,0 +1,10 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+input::placeholder {
+  font-weight: bold; /* Reset font weight for the placeholder */
+}
