@@ -13,12 +13,18 @@ const Profile = () => {
             <ProfilePosts/>
             <ProfilePosts/>
         </div>
+        {/*  profile div */}
         <div className='md:sticky md:top-12  flex justify-start md:justify-end items-start md:w-[30%] w-full md:items-end   '>
         <div className=" flex flex-col space-y-4 items-start">
       <h1 className='text-xl font-bold mb-4'>Profile</h1>
+      {/* username */}
       <input type="text" className='outline-none px-4 py-2 text-gray-500 ' placeholder='Your username'/>
+      {/* email */}
       <input type="email" className='outline-none px-4 py-2 text-gray-500 ' placeholder='Your email'/>
-      <input type="password" className='outline-none px-4 py-2 text-gray-500 ' placeholder='Your password'/> 
+      {/* password */}
+      <input type="password" className='outline-none px-4 py-2 text-gray-500 ' placeholder='Your password'/>
+
+       {/*button for update and delete  */}
       <div className="flex items-center space-x-4 mt-8">
             <button  className="text-white font-semibold bg-black px-4 py-2 hover:text-black hover:bg-gray-400">Update</button>
             <button className="text-white font-semibold bg-black px-4 py-2 hover:text-black hover:bg-gray-400">Delete</button>
