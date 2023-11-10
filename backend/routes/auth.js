@@ -27,7 +27,7 @@ router.post("/login",async (req,res)=>{
     try{
         // finding user using email
         const user=await User.findOne({email:req.body.email})
-        console.log(user)
+        // console.log(user)
     //    if user is not found then show error
         if(!user){
             return res.status(404).json("User not found!")
@@ -38,13 +38,13 @@ router.post("/login",async (req,res)=>{
         if(!match){
             return res.status(401).json("Wrong credentials!")
         }
-        // after make token using jwt.sign method 
+        // if password matches make token using jwt.sign method 
         const token=jwt.sign({_id:user._id,username:user.username,email:user.email},process.env.SECRET,{expiresIn:"3d"})
-        // extract password and assign to password variable and other information to info variable here 
+        // extract password and assign to password variable and other information to info variable here we are extracting from user object we can write only user also in place of user._doc 
         const {password,...info}=user._doc
-        console.log(user._doc)
+        // console.log(user._doc)
         // store token in cookie and show user info except password
-        res.cookie("token",token).status(200).json(info)
+        res.cookie("token",token,{httpOnly:true}).status(200).json(info)
 
     }
     catch(err){
@@ -63,4 +63,19 @@ router.get('/logout',async(req,res)=>{
     }
 })
 // secure: true means use only https and sameSite:"none" should be used if we are using cors
+
+// refetch user
+router.get('/refetch',(req, res) => {
+    if (!req.cookies || !req.cookies.token) {
+        return res.status(400).json({ error: 'Token not found in the cookie' });
+      }
+    const token = req.cookies.token
+    jwt.verify(token,process.env.SECRET,{},async(err,data)=>{
+        if(err){
+            return res.status(404).json(err)
+        }
+        res.status(200).json(data)
+    })
+})
+
 module.exports = router

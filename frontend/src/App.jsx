@@ -1,4 +1,3 @@
-import { useState } from 'react'
 
 import {Route, Routes } from 'react-router-dom'
 import './App.css'
@@ -10,13 +9,13 @@ import PostDetails from './pages/PostDetails'
 import Profile from './pages/Profile'
 import CreatePost from './pages/CreatePost'
 import EditPost from './pages/EditPost'
+import { UserContextProvider } from './context/UserContext'
 const App =()=>{
 
   return (
     <>
-      <div>
-       
-        <Routes>
+     <UserContextProvider>
+     <Routes>
         <Route exact path ='/' element ={<Home/>}/>
         <Route exact path ='/login' element ={<Login/>}/>
         <Route exact path ='/register' element ={<Register/>}/>
@@ -25,8 +24,7 @@ const App =()=>{
         <Route exact path ='/edit/:id' element ={<EditPost/>}/>
         <Route exact path ='/profile/:id' element ={<Profile/>}/>
         </Routes>
-      </div>
-      
+     </UserContextProvider>
 
     </>
   )

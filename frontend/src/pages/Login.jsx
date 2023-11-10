@@ -1,8 +1,27 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import {URL} from '../url'
+import axios from 'axios'
 import Footer from '../components/Footer'
 
+import { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 const Login = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState(false)
+  const {setUser} = useContext(UserContext)
+  const navigate = useNavigate()
+  const handleLogin=async()=>{
+   try{
+   const res = await axios.post(URL+'/api/auth/login',{email,password},{withCredentials:true})
+   setUser(res.data)
+   navigate('/')
+   }catch(err){
+    setError(true)
+    console.error(err)
+   }
+  }
   return (
 
     <>
@@ -16,12 +35,13 @@ const Login = () => {
 
        <h1 className='text-xl font-bold text-left'>Login to your account</h1>
        {/* email */}
-       <input type="text" className='w-full px-4 py-2 border-2 border-black outline-0' placeholder='Enter your email' />
+       <input onChange={(e)=>setEmail(e.target.value)} type="text" className='w-full px-4 py-2 border-2 border-black outline-0' placeholder='Enter your email' />
        {/* password */}
-       <input type="password" className='w-full px-4 py-2 border-2 border-black outline-0' placeholder='Enter your password' />
+       <input onChange={(e)=>setPassword(e.target.value)} type="password" className='w-full px-4 py-2 border-2 border-black outline-0' placeholder='Enter your password' />
        {/* button */}
-       <button className='w-full px-4 py-4 text-lg font-bold text-white bg-black rounded-lg hover:bg-white hover:text-black hover:border-black hover:border-2'>Login</button>
-       
+       <button onClick={handleLogin} className='w-full px-4 py-4 text-lg font-bold text-white bg-black rounded-lg hover:bg-white hover:text-black hover:border-black hover:border-2'>Login</button>
+       {/* if login is not successful then show below error */}
+       {error && <h3 className='text-red-500 text-sm'>something went wrong</h3>}
        <div className="flex justify-center items-center space-x-4">
            <p>New here?</p>
            <p className='text-gray-500 hover:text-black' ><Link to="/register">Register</Link></p>
