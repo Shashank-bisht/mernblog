@@ -13,17 +13,12 @@ export function UserContextProvider({children}){
 
     const getUser = async()=>{
         try{
-        const token = Cookies.get('token')
-        if(token) {
-            // Set the token in the request headers
-            const headers = {
-              Authorization: token, // Prefix with 'Bearer' if it's not included in the token
-            };
-        const res = await axios.get(URL+"/api/auth/refetch",{withCredentials:true,headers:headers})
-        console.log('Response Status:', res.status);
-        console.log('Response Data:', res.data);
+        const res = await axios.get(URL+"/api/auth/refetch",{withCredentials:true})
+        // console.log('Response Status:', res.status);
+        // console.log('Response Data:', res.data);
+        setUser(res.data)
         console.log(res.data)}
-        }catch(error){
+        catch(error){
             console.error(error)
         }
     }
