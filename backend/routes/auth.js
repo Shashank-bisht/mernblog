@@ -10,7 +10,7 @@ router.post('/register',async(req,res)=>{
         // extracting data from body
    const {username,email,password} = req.body
    const salt = await bcrypt.genSalt(10)
-   const hashedPassword = await bcrypt.hashSync(password,salt)
+   const hashedPassword = bcrypt.hashSync(password,salt)
 //    creating new user
    const newUser = new User({username, email, password:hashedPassword})
 //    saving new user
@@ -62,7 +62,7 @@ router.get('/logout',async(req,res)=>{
       res.status(500).json(err)
     }
 })
-// secure: true means use only https and sameSite:"none" should be used if we are using cors
+// secure: : Ensures the cookie is only sent over HTTPS, enhancing security. and sameSite:"none" Allows cross-site requests. It's often necessary for third-party login systems.
 
 // refetch user
 router.get('/refetch',(req, res) => {

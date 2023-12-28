@@ -16,7 +16,9 @@ dotenv.config()
 app.use(express.json());
 app.use(cookieParser());
 // below line is saying give access to the below url
-app.use(cors({origin:['http://127.0.0.1:5173', 'https://127.0.0.1:5173'],credentials:true}))
+app.use(cors({origin:'http://localhost:5173',credentials:true}))
+
+// api/something this base route
 app.use('/api/auth',authRoute);
 app.use('/api/users',userRoute);
 app.use('/api/post',postRoute);
