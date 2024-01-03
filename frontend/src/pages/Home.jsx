@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import HomePosts from '../components/HomePosts'
 import Navbar from '../components/Navbar'
 import Loader from '../components/Loader'
 import Footer from '../components/Footer'
 import { URL } from '../url'
+import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 const Home = () => {
   // getting search property from useLocation()
   const {search}= useLocation()
   const [posts, setPosts] = useState([])
   const [loader, setloader] = useState(false)
   const [noResults, setNoResults] = useState(false)
+  const {user} =useContext(UserContext)
    const fetchPosts = async()=>{
     setloader(true)
     try{
@@ -38,7 +41,7 @@ const Home = () => {
      <div className='px-8 md:px-[200px] min-h-[80vh]'>
       {/* For each post, a HomePosts component is rendered, passing the post data as a prop and a key to uniquely identify each post component. */}
     {loader?<div className='h-[40vh] flex justify-center items-center'><Loader/></div>:!noResults?posts.map((post)=>(
-      <HomePosts key={post._id} post={post}/>
+      <Link to={user?`/posts/post/${post._id}`:"/login"}> <HomePosts key={post._id} post={post}/></Link>
     )):<h3 className='text-center font-bold'>No posts available</h3>}
     </div>
     <Footer/>
