@@ -21,7 +21,7 @@ const Navbar = () => {
         <Link to="/">Blogify</Link>
       </h1>
 
-      {/* search bar */}
+      {/*if path = '/' then show  search bar */}
      {path==='/'&& <div className="flex justify-center items-center space-x-0">
         {/* searchlogo */}
         <p

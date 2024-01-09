@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import { URL } from '../url'
+import {IF, URL } from '../url'
 import Loader from '../components/Loader'
 
 
@@ -60,7 +60,7 @@ console.log(error)
             </div>
             </div>
             {/* post image */}
-            <img src={post.photo} alt="" className='w-full mx-auto mt-8 rounded-xl' />
+            <img src={IF + post.photo} alt="" className='w-full mx-auto mt-8 rounded-xl' />
             {/* post data */}
             <p className='mx-auto mt-8'>{post.desc}</p>
 

@@ -6,6 +6,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const verifyToken = require('../verifyToken');
 
+
 // update user
 router.put("/:id",verifyToken,async (req, res)=> {
     try{

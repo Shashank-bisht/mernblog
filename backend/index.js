@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 // importing dotenv to use it
 const dotenv = require("dotenv");
+const path = require('path')
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const authRoute = require("./routes/auth");
@@ -16,6 +17,7 @@ dotenv.config();
 //middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use('/images',express.static(path.join(__dirname,'images')))
 
 // below line is saying give access to the below url
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -32,8 +34,8 @@ const storage = multer.diskStorage({
     cb(null, 'images')
   },
   filename: (req, file, cb) => {
-    // cb(null, req.body.img)
-    cb(null,"avatar_2.jpeg")
+    cb(null, req.body.img)
+    // cb(null,"avatar_2.jpeg")
   },
 })
 

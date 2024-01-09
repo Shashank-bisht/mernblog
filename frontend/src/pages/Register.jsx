@@ -23,7 +23,7 @@ const Register = () => {
       setEmail(res.data.email);
       setPassword(res.data.password);
       setError(false);
-      //  after setting the data and pressign button throw user to /login
+      //  after setting the data and pressing sign button throw user to /login
       navigate("/login");
     } catch (err) {
       setError(true);
