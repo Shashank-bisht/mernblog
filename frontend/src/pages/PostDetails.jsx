@@ -6,6 +6,7 @@ import {MdDelete} from 'react-icons/md'
 import Comment from '../components/Comment'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import {IF, URL } from '../url'
@@ -17,6 +18,7 @@ const postId = useParams().id
 const [post, setPost] = useState([])
 const {user} = useContext(UserContext)
 const [loader, setLoader] = useState(false)
+const navigate = useNavigate()
 console.log(postId.id)
 
   const fetchPost = async()=>{
@@ -29,7 +31,14 @@ console.log(postId.id)
  } catch (error) {
 console.log(error)
  }
- 
+  }
+  const deletePost = async()=>{
+    try{
+    await axios.delete(URL+"/api/post/"+postId, {withCredentials:true})
+    navigate("/")
+    }catch(err){
+    console.log(err)
+    }
   }
   useEffect(()=>{
     fetchPost()
@@ -47,7 +56,7 @@ console.log(error)
           {/* option for edit and delete */}
           {user?._id===post?.userId && <div className='flex items-center justify-center space-x-2'>
             <p><BiEdit/></p>
-            <p><MdDelete/></p>
+            <p className='cursor-pointer' onClick={deletePost}><MdDelete/></p>
           </div>}
           
             </div>

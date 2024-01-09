@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 const verifyToken = require("../verifyToken");
-
+const Comment= require('../models/Comment');
 
 // update post
 router.put("/:id", verifyToken, async (req, res) => {
@@ -24,6 +24,7 @@ router.put("/:id", verifyToken, async (req, res) => {
 router.delete("/:id", verifyToken, async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
+    await Comment.deleteMany({postId: req.params.id})
     res.status(200).json("Post has been deleted!");
   } catch (err) {
     res.status(500).json(err);
