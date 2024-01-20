@@ -16,7 +16,9 @@ const PostDetails = () => {
   const postId = useParams().id;
   const [post, setPost] = useState([]);
   const { user } = useContext(UserContext);
+  const [comment, setComment] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [comments,setcomments] = useState("")
   const navigate = useNavigate();
   console.log(postId.id);
 
@@ -44,6 +46,33 @@ const PostDetails = () => {
   useEffect(() => {
     fetchPost();
   }, [postId]);
+
+  const fetchPostComments = async()=>{
+    try {
+      const res = await axios.get(URL + "/api/comments/post/" + postId);
+      setComment(res.data);
+    }catch(err){
+      console.log(err)
+    }
+  }
+  useEffect(()=>{
+    fetchPostComments()
+  },[postId])
+
+  const postComment = async(e)=>{
+    e.preventDefault();
+    try {
+      const res = await axios.post(URL + "/api/comments/create" ,{
+        comment:comments , author:user.username, postId:postId, userId:user._id,
+      },{withCredentials:true})
+        setcomments("")
+        fetchPostComments()
+        window.location.reload()
+      }
+    catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div>
       <Navbar />
@@ -75,8 +104,8 @@ const PostDetails = () => {
           <div className="flex items-center justify-between mt-2 md:mt-4">
             <p>@{post.username}</p>
             <div className="flex space-x-2">
-              <p>18/2/3333</p>
-              <p>19:22</p>
+              <p>{new Date(post.updatedAt).toString().slice(0, 15)}</p>
+              <p>{new Date(post.updatedAt).toString().slice(15, 24)}</p>
             </div>
           </div>
           {/* post image */}
@@ -109,17 +138,18 @@ const PostDetails = () => {
           <div className="flex flex-col mt-4">
             <h3 className="mt-6 mb-4 font-semibold">Comments:</h3>
             {/* comments */}
-            <Comment />
-            <Comment />
+            {comment?.map((comment) => {
+              return <Comment key={comment._id} comment={comment} post={post} />;
+            })}
           </div>
           {/* posting comment div */}
           <div className="flex flex-col items-center justify-between mt-2 md:flex-row">
-            <input
+            <input onChange={(e)=>setcomments(e.target.value)}
               type="text"
               className="md:w-[78%] rounded-md outline-none px-5 border  py-2 "
               placeholder="write a comment"
             />
-            <button className="bg-black text-white  px-4 py-2 rounded-md md:w-[20%] mt-4 md:mt-0">
+            <button  onClick={postComment} className="bg-black text-white  px-4 py-2 rounded-md md:w-[20%] mt-4 md:mt-0">
               Add Comment
             </button>
           </div>

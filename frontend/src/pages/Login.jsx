@@ -67,6 +67,7 @@ const Login = () => {
           {error && (
             <h3 className="text-red-500 text-sm">something went wrong</h3>
           )}
+          {/* shanky */}
           <div className="flex justify-center items-center space-x-4">
             <p>New here?</p>
             <p className="text-gray-500 hover:text-black">
