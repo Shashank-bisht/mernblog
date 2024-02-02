@@ -1,3 +1,4 @@
-export const URL = "http://localhost:8080"
+export const URL = "https://mernblog-roan.vercel.app/"
 
-export const IF = 'http://localhost:8080/images/'
+export const IF = 'https://mernblog-roan.vercel.app/images/'
+
