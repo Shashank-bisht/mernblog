@@ -6,9 +6,10 @@ const HomePosts = ({post}) => {
     <div className='w-full flex mt-8 space-x-4 mx-12 '>
       {/* left for picture */}
       <div className='w-[35%] h-[200px] flex justify-center items-center'>
-       <img src={IF + post.photo} alt=""  className='h-full w-full object-cover m-2'/>
+       <img src={IF + post.photo} alt=""  className='h-full rounded-md w-full object-cover m-2'/>
+      
       </div>
-
+      
       {/* right for content regarding post */}
       
       <div className='flex flex-col w-[65%] '>

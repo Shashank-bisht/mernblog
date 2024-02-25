@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use('/images',express.static(path.join(__dirname,'images')))
 
 // below line is saying give access to the below url
-app.use(cors({ origin: "https://mernblog-front-nine.vercel.app", credentials: true }));
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 // api/something this base route
 app.use("/api/auth", authRoute);

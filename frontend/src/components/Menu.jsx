@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import axios from 'axios'
 import { URL } from '../url'
+import { Link } from 'react-router-dom'
 const Menu = () => {
     // if user is logged in
     const {user} = useContext(UserContext)
@@ -27,13 +28,13 @@ const Menu = () => {
         </h3>}
         {/* if user is logged in show this */}
         {user && <h3 className='cursor-pointer text-white text-sm hover:text-gray-500'>
-          Profile
+        <Link to={`/profile/${user._id}`}>Profile</Link>
         </h3>}
         {user && <h3 className='cursor-pointer text-white text-sm hover:text-gray-500'>
-          Write
+          <Link to="/write">Write</Link>
         </h3>}
         {user && <h3 className='cursor-pointer text-white text-sm hover:text-gray-500'>
-         My Blogs
+         <Link to={`/myblogs/${user._id}`}>My Blogs</Link>
         </h3>}
         {user && <h3 onClick={handleLogout} className='cursor-pointer text-white text-sm hover:text-gray-500'>
          Logout

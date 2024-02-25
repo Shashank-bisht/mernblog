@@ -40,8 +40,8 @@ const Home = () => {
   //The reason search is passed inside the dependency array [search] in the useEffect is to specify that the effect should run whenever the search value changes.
   return (
     <>
+      <div className="px-8 md:px-[200px] h-full">
       <Navbar />
-      <div className="px-8 md:px-[200px] min-h-[80vh]">
         {/* For each post, a HomePosts component is rendered, passing the post data as a prop and a key to uniquely identify each post component. */}
         {loader ? (
           <div className="h-[40vh] flex justify-center items-center">
@@ -59,7 +59,7 @@ const Home = () => {
           <h3 className="text-center font-bold">No posts available</h3>
         )}
       </div>
-      <Footer />
+      <Footer  />
     </>
   );
 };
