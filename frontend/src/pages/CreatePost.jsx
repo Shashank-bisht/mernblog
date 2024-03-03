@@ -94,12 +94,12 @@ try {
                 type="text"
                 value={cat}
                 onChange={(e) => setCat(e.target.value)}
-                className="px-4 py-2 outline-none"
+                className="px-4 py-2 outline-none rounded-sm"
                 placeholder="Enter post category"
               />
               <div
                 onClick={addCategory}
-                className="bg-black text-white px-4 py-2 font-semibold cursor-pointer"
+                className="bg-black rounded-md text-white px-4 py-2 font-semibold cursor-pointer"
               >
                 Add
               </div>
@@ -135,7 +135,7 @@ try {
             rows="10"
           ></textarea>
           {/* button */}
-          <button onClick={handleCreate} className="bg-black text-white font-semibold w-full md:w-[20%] mx-auto px-4 py-2 md:text-xl text-lg">
+          <button onClick={handleCreate} className="bg-black text-white font-semibold w-full md:w-[20%] rounded-md mx-auto px-4 py-2 md:text-xl text-lg">
             Create
           </button>
         </form>

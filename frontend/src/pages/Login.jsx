@@ -35,7 +35,7 @@ const Login = () => {
         <h1 className="md:text-xl sm:text-lg font-extrabold">
           <Link to="/">Blogify</Link>
         </h1>
-        <h3>
+        <h3 className="font-bold">
           <Link to="/register">Register</Link>
         </h3>
       </div>
@@ -67,10 +67,10 @@ const Login = () => {
           {error && (
             <h3 className="text-red-500 text-sm">something went wrong</h3>
           )}
-          {/* shanky */}
+          
           <div className="flex justify-center items-center space-x-4">
             <p>New here?</p>
-            <p className="text-gray-500 hover:text-black">
+            <p className="text-blue-500 hover:text-black">
               <Link to="/register">Register</Link>
             </p>
           </div>

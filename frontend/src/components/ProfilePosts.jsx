@@ -3,6 +3,7 @@ import axios from 'axios';
 import { URL } from '../url';
 import { UserContext } from '../context/UserContext';
 import { IF } from '../url';
+import { Link } from 'react-router-dom';
 
 const ProfilePosts = () => {
   const { user } = useContext(UserContext);
@@ -46,7 +47,7 @@ const ProfilePosts = () => {
                 </div>
               </div>
               {/* post description */}
-              <p className='text-sm md:text-lg'>{post.desc.slice(0,200)+"... Read more"}</p>
+              <p className='text-sm md:text-lg'>{post.desc.slice(0,200)}<span className='text-blue-500'><Link to={`/posts/post/${post._id}`}>... Read more</Link></span></p>
             </div>
           </div>
         </div>

@@ -112,10 +112,11 @@ const PostDetails = () => {
           <img
             src={IF + post.photo}
             alt=""
-            className="w-full mx-auto mt-8 rounded-xl"
+            className="w-full md:w-1/2 md:h-1/2 mx-auto mt-8 mb-5 rounded-xl"
           />
           {/* post data */}
-          <p className="mx-auto mt-8">{post.desc}</p>
+          <div style={{ whiteSpace: 'pre-line' }} dangerouslySetInnerHTML={{ __html: post.desc }} />
+
 
           {/* categories section */}
           <div className="flex items-center mt-8 space-x-4 font-semibold">
@@ -125,7 +126,7 @@ const PostDetails = () => {
                 return (
                   <div
                     key={category.id}
-                    className="bg-gray-300 rounded-lg px-3 py-1 "
+                    className="bg-gray-400 rounded-lg px-4 py-2 "
                   >
                     {category}
                   </div>

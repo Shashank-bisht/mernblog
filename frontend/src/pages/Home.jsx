@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
-
 const Home = () => {
   // getting search property from useLocation()
   const { search } = useLocation();
@@ -39,28 +38,27 @@ const Home = () => {
   }, [search]);
   //The reason search is passed inside the dependency array [search] in the useEffect is to specify that the effect should run whenever the search value changes.
   return (
-    <>
-      <div className="px-8 md:px-[200px] h-full">
-      <Navbar />
-        {/* For each post, a HomePosts component is rendered, passing the post data as a prop and a key to uniquely identify each post component. */}
-        {loader ? (
-          <div className="h-[40vh] flex justify-center items-center">
-            <Loader />
-          </div>
-        ) : !noResults ? (
-          posts.map((post) => (
-            <Link to={user ? `/posts/post/${post._id}` : "/login"}>
-              {" "}
-              <HomePosts key={post._id} post={post} />
-            </Link>
-          ))
-        ) : (
-          // this will run when no result will be false
-          <h3 className="text-center font-bold">No posts available</h3>
-        )}
-      </div>
-      <Footer  />
-    </>
+    <div className="flex flex-col min-h-screen">
+    <Navbar />
+    <div className="flex-grow px-8 md:px-[200px]">
+      {/* For each post, a HomePosts component is rendered, passing the post data as a prop and a key to uniquely identify each post component. */}
+      {loader ? (
+        <div className="h-[40vh] flex justify-center items-center">
+          <Loader />
+        </div>
+      ) : !noResults ? (
+        posts.map((post) => (
+          <Link to={user ? `/posts/post/${post._id}` : "/login"} key={post._id}>
+            <HomePosts post={post} />
+          </Link>
+        ))
+      ) : (
+        // this will run when no result will be false
+        <h3 className="text-center font-bold">No posts available</h3>
+      )}
+    </div>
+    <Footer />
+  </div>
   );
 };
 

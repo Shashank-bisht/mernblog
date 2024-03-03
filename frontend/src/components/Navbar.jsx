@@ -16,7 +16,7 @@ const Navbar = () => {
   };
   const { user } = useContext(UserContext);
   return (
-    <div className="flex relative items-center justify-between px-6 md:px-[200px] py-4">
+    <div className="flex relative items-center justify-between px-6 md:px-[150px] py-4">
       <h1 className="md:text-xl sm:text-lg font-extrabold">
         <Link to="/">Blogify</Link>
       </h1>
@@ -43,14 +43,14 @@ const Navbar = () => {
         </div>
       )}
 
-      <div className="hidden md:flex items-center justify-center space-x-2 md:space-x-4">
+      <div className="hidden md:flex items-center justify-between space-x-4 md:space-x-4">
         {/* if user  not logged in then show login and register and if user is  logged in then show write and menu */}
         {user ? (
-          <h3>
+          <h3 className="font-bold">
             <Link to="/write">Write</Link>
           </h3>
         ) : (
-          <h3>
+          <h3 className="font-bold">
             <Link to="/login">Login</Link>
           </h3>
         )}
@@ -62,7 +62,7 @@ const Navbar = () => {
             {menu && <Menu />}
           </div>
         ) : (
-          <h3>
+          <h3 className="font-bold">
             <Link to="/register">Register</Link>
           </h3>
         )}

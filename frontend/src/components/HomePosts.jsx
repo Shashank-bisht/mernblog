@@ -25,7 +25,7 @@ const HomePosts = ({post}) => {
        </div>
        </div>
        {/* post description */}
-       <p className='text-sm md:text-lg'>{post.desc.slice(0,200)+"... Read more"}</p>
+       <p className='text-sm  md:text-lg'>{post.desc.slice(0,200)}<span className='text-blue-500'>... Read more</span></p>
       </div>
       </div>
     
