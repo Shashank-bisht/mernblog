@@ -31,11 +31,10 @@ const Comment = ({comment,post}) => {
         {/* <p><BiEdit/></p> */}
         <p className='cursor-pointer' onClick={()=>deletecomment(comment._id)}><MdDelete/></p>
          </div>:""}
-            
         </div>
     </div>
     <p className='px-4 mt-2'>{comment.comment}</p>
-</div>
+    </div>
   )
 }
 

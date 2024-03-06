@@ -3,7 +3,9 @@ import { UserContext } from '../context/UserContext'
 import axios from 'axios'
 import { URL } from '../url'
 import { Link } from 'react-router-dom'
+import {Navigate , useNavigate } from 'react-router-dom'
 const Menu = () => {
+  const navigate = useNavigate()
     // if user is logged in
     const {user} = useContext(UserContext)
    const {setUser} = useContext(UserContext)
@@ -11,6 +13,7 @@ const Menu = () => {
       try{
          const res = await axios.get(URL+"/api/auth/logout",{withCredentials:true});
          setUser(null);
+         navigate("/")
       }
       catch(err){
       console.log(err)

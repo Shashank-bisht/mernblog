@@ -16,9 +16,9 @@ const PostDetails = () => {
   const postId = useParams().id;
   const [post, setPost] = useState([]);
   const { user } = useContext(UserContext);
-  const [comment, setComment] = useState([]);
+  const [comment, setComment] = useState("");
   const [loader, setLoader] = useState(false);
-  const [comments,setcomments] = useState("")
+  const [comments,setcomments] = useState([])
   const navigate = useNavigate();
   console.log(postId.id);
 
@@ -50,7 +50,7 @@ const PostDetails = () => {
   const fetchPostComments = async()=>{
     try {
       const res = await axios.get(URL + "/api/comments/post/" + postId);
-      setComment(res.data);
+      setcomments(res.data);
     }catch(err){
       console.log(err)
     }
@@ -63,9 +63,9 @@ const PostDetails = () => {
     e.preventDefault();
     try {
       const res = await axios.post(URL + "/api/comments/create" ,{
-        comment:comments , author:user.username, postId:postId, userId:user._id,
+        comment:comment , author:user.username, postId:postId, userId:user._id,
       },{withCredentials:true})
-        setcomments("")
+      setComment("")
         fetchPostComments()
         window.location.reload()
       }
@@ -139,13 +139,13 @@ const PostDetails = () => {
           <div className="flex flex-col mt-4">
             <h3 className="mt-6 mb-4 font-semibold">Comments:</h3>
             {/* comments */}
-            {comment?.map((comment) => {
+            {comments?.map((comment) => {
               return <Comment key={comment._id} comment={comment} post={post} />;
             })}
           </div>
           {/* posting comment div */}
           <div className="flex flex-col items-center justify-between mt-2 md:flex-row">
-            <input onChange={(e)=>setcomments(e.target.value)}
+            <input onChange={(e)=>setComment(e.target.value)}
               type="text"
               className="md:w-[78%] rounded-md outline-none px-5 border  py-2 "
               placeholder="write a comment"
